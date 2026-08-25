@@ -48,14 +48,51 @@ if (!reduce) {
 const form = document.querySelector('#earlyForm');
 const msg = document.querySelector('#formMessage');
 if (form) {
-  form.addEventListener('submit', e => {
+  form.addEventListener('submit', async e => {
     e.preventDefault();
     const email = form.email.value.trim();
+    const button = form.querySelector('button[type="submit"]');
     if (!email) return;
-    localStorage.setItem('ignyxx_early_access_email', email);
-    if (msg) msg.textContent = "You're in. Watch your inbox — 001 won't stay hidden forever.";
-    form.reset();
-    if (msg && !reduce) gsap.fromTo(msg, { y: 8, opacity: 0 }, { y: 0, opacity: 1, duration: .5 });
+
+    const originalLabel = button?.querySelector('span')?.textContent || '';
+    if (msg) msg.textContent = '';
+    if (button) {
+      button.disabled = true;
+      const label = button.querySelector('span');
+      if (label) label.textContent = 'JOINING...';
+    }
+
+    try {
+      const response = await fetch('/api/early-access', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          email,
+          source: 'ignyxx.in',
+          marketing_consent: true
+        })
+      });
+
+      const data = await response.json().catch(() => ({}));
+      if (!response.ok || !data.ok) {
+        throw new Error(data.message || 'Could not save your signup right now.');
+      }
+
+      localStorage.setItem('ignyxx_early_access_email', email);
+      if (msg) msg.textContent = data.duplicate
+        ? "You're already on the list. 001 is still watching."
+        : "You're in. Watch your inbox — 001 won't stay hidden forever.";
+      form.reset();
+      if (msg && !reduce) gsap.fromTo(msg, { y: 8, opacity: 0 }, { y: 0, opacity: 1, duration: .5 });
+    } catch (error) {
+      if (msg) msg.textContent = error.message || 'Could not save your signup right now. Please try again.';
+    } finally {
+      if (button) {
+        button.disabled = false;
+        const label = button.querySelector('span');
+        if (label) label.textContent = originalLabel;
+      }
+    }
   });
 }
 window.addEventListener('load', () => ScrollTrigger.refresh());

@@ -37,7 +37,6 @@ if (!reduce) {
   gsap.to('.manifesto-orbit span:nth-child(1)', { xPercent: 16, yPercent: -8, rotation: 7, ease: 'none', scrollTrigger: { trigger: '.manifesto', start: 'top bottom', end: 'bottom top', scrub: 1.2 } });
   gsap.to('.manifesto-orbit span:nth-child(2)', { xPercent: -18, yPercent: 9, rotation: -8, ease: 'none', scrollTrigger: { trigger: '.manifesto', start: 'top bottom', end: 'bottom top', scrub: 1.2 } });
   gsap.utils.toArray('.tunnel-x').forEach((el, i) => gsap.fromTo(el, { scale: .8 + i * .08, rotation: -5 + i * 2, opacity: .02 }, { scale: 1.16 + i * .08, rotation: 5 - i * 2, opacity: .08 - i * .01, ease: 'none', scrollTrigger: { trigger: '.project', start: 'top bottom', end: 'bottom top', scrub: 1.2 } }));
-  gsap.to('.redacted span', { boxShadow: '0 0 32px rgba(255,77,0,.48)', repeat: -1, yoyo: true, duration: 1.7, stagger: .09 });
   gsap.to('.p1', { rotation: 360, duration: 42, repeat: -1, ease: 'none' });
   gsap.to('.p2', { rotation: -360, duration: 34, repeat: -1, ease: 'none' });
   gsap.to('.p3', { rotation: 360, duration: 24, repeat: -1, ease: 'none' });
@@ -80,8 +79,8 @@ if (form) {
 
       localStorage.setItem('ignyxx_early_access_email', email);
       if (msg) msg.textContent = data.duplicate
-        ? "You're already on the list. 001 is still watching."
-        : "You're in. Watch your inbox — 001 won't stay hidden forever.";
+        ? "You're already on the list. We'll keep you close to what moves next."
+        : "You're in. Watch your inbox for the next signal from IGNYXX.";
       form.reset();
       if (msg && !reduce) gsap.fromTo(msg, { y: 8, opacity: 0 }, { y: 0, opacity: 1, duration: .5 });
     } catch (error) {

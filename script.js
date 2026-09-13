@@ -30,13 +30,15 @@ if (!reduce) {
   gsap.to('.trail-c', { x: -95, opacity: .05, duration: 4.6, repeat: -1, yoyo: true, ease: 'sine.inOut' });
   gsap.to('.hero-copy', { y: -70, opacity: .25, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: .6 } });
   gsap.to('.hero-symbol-wrap', { y: 85, scale: 1.08, rotation: 3, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: .7 } });
-  const reveals = [['.manifesto-lead', { x: -90, opacity: 0, filter: 'blur(8px)' }],['.manifesto-body', { x: 90, opacity: 0, filter: 'blur(8px)' }],['.project-wrap', { y: 100, scale: .94, opacity: 0, filter: 'blur(12px)' }],['.invite-wrap', { y: 80, scale: .96, opacity: 0, filter: 'blur(10px)' }],['.final-copy', { x: -90, opacity: 0 }]];
+  const reveals = [['.manifesto-lead', { x: -90, opacity: 0, filter: 'blur(8px)' }],['.manifesto-body', { x: 90, opacity: 0, filter: 'blur(8px)' }],['.project-wrap', { y: 100, scale: .94, opacity: 0, filter: 'blur(12px)' }],['.venture002-wrap', { y: 90, scale: .96, opacity: 0, filter: 'blur(10px)' }],['.venture003-wrap', { y: 90, scale: .95, opacity: 0, filter: 'blur(11px)' }],['.invite-wrap', { y: 80, scale: .96, opacity: 0, filter: 'blur(10px)' }],['.final-copy', { x: -90, opacity: 0 }]];
   reveals.forEach(([target, from]) => gsap.from(target, { ...from, duration: 1.05, ease: 'power3.out', scrollTrigger: { trigger: target, start: 'top 84%', once: true } }));
   gsap.utils.toArray('.process-card').forEach((card, i) => gsap.from(card, { y: 70, rotationX: 7, scale: .97, opacity: 0, duration: .9, delay: i * .06, ease: 'power3.out', scrollTrigger: { trigger: card, start: 'top 88%', once: true } }));
   gsap.to('.motion-word', { xPercent: -12, ease: 'none', scrollTrigger: { trigger: '.manifesto', start: 'top bottom', end: 'bottom top', scrub: 1 } });
   gsap.to('.manifesto-orbit span:nth-child(1)', { xPercent: 16, yPercent: -8, rotation: 7, ease: 'none', scrollTrigger: { trigger: '.manifesto', start: 'top bottom', end: 'bottom top', scrub: 1.2 } });
   gsap.to('.manifesto-orbit span:nth-child(2)', { xPercent: -18, yPercent: 9, rotation: -8, ease: 'none', scrollTrigger: { trigger: '.manifesto', start: 'top bottom', end: 'bottom top', scrub: 1.2 } });
   gsap.utils.toArray('.tunnel-x').forEach((el, i) => gsap.fromTo(el, { scale: .8 + i * .08, rotation: -5 + i * 2, opacity: .02 }, { scale: 1.16 + i * .08, rotation: 5 - i * 2, opacity: .08 - i * .01, ease: 'none', scrollTrigger: { trigger: '.project', start: 'top bottom', end: 'bottom top', scrub: 1.2 } }));
+  gsap.to('.venture003-number', { xPercent: 6, ease: 'none', scrollTrigger: { trigger: '.venture003', start: 'top bottom', end: 'bottom top', scrub: 1.1 } });
+  gsap.utils.toArray('.venture003-orbit span').forEach((el, i) => gsap.to(el, { rotation: i % 2 ? -18 : 18, scale: 1.08 + i * .04, ease: 'none', scrollTrigger: { trigger: '.venture003', start: 'top bottom', end: 'bottom top', scrub: 1.2 } }));
   gsap.to('.p1', { rotation: 360, duration: 42, repeat: -1, ease: 'none' });
   gsap.to('.p2', { rotation: -360, duration: 34, repeat: -1, ease: 'none' });
   gsap.to('.p3', { rotation: 360, duration: 24, repeat: -1, ease: 'none' });
